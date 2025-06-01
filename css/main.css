@@ -2364,3 +2364,123 @@ footer a:hover {
     height: 70px;
   }
 }
+
+@media (max-width: 900px) {
+  nav .nav-links {
+    gap: 0.1rem;
+  }
+  .container {
+    padding: 0 0.7rem;
+  }
+  .hero-content {
+    width: 100%;
+    max-width: 100%;
+    padding: 2rem 0.7rem;
+  }
+  .hero-image {
+    width: 100%;
+    height: auto;
+    margin-top: 1.2rem;
+  }
+  .hero-swiper .swiper-slide {
+    flex-direction: column;
+    align-items: flex-start;
+    min-height: unset;
+    padding: 0;
+  }
+  .footer-grid {
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+  }
+  .footer-links {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+  }
+}
+@media (max-width: 768px) {
+  nav .nav-links {
+    flex-direction: column;
+    gap: 0.5rem;
+    background: #fff;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100vw;
+    padding: 1.2rem 0;
+    display: none;
+    z-index: 1001;
+  }
+  nav .nav-links.active {
+    display: flex;
+  }
+  .mobile-menu-btn {
+    display: block;
+    position: absolute;
+    right: 1.2rem;
+    top: 1.2rem;
+    z-index: 1002;
+  }
+  .hero-content {
+    padding: 1.2rem 0.5rem;
+    min-height: unset;
+  }
+  .hero-image {
+    width: 100%;
+    height: auto;
+    margin-top: 1.2rem;
+  }
+  .services-atlanta-grid, .assurances-grid {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+  .atlanta-card, .assurances-content {
+    padding: 1.2rem 0.7rem;
+    min-width: 0;
+  }
+  .footer-grid {
+    flex-direction: column;
+    gap: 1.2rem;
+    align-items: center;
+  }
+  .footer-links {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.7rem;
+  }
+}
+@media (max-width: 600px) {
+  .container {
+    padding: 0 0.2rem;
+  }
+  .hero-content {
+    padding: 0.7rem 0.2rem;
+  }
+  .hero-main {
+    font-size: 1.2rem;
+  }
+  .hero-sub {
+    font-size: 0.95rem;
+  }
+  .primary-btn, .secondary-btn {
+    font-size: 0.9rem;
+    padding: 0.4rem 1rem;
+  }
+  .footer-grid {
+    flex-direction: column;
+    gap: 0.7rem;
+    align-items: center;
+  }
+  .footer-links {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+  }
+  .footer-brand h3 {
+    font-size: 1.1rem;
+  }
+  .footer-brand p {
+    font-size: 0.95rem;
+  }
+}
