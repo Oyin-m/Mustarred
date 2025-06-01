@@ -2087,6 +2087,8 @@ footer a:hover {
   }
   .blog-grid {
     gap: 1.2rem;
+    grid-template-columns: 1fr;
+    padding: 0 0.5rem;
   }
   .blog-card-content {
     padding: 1.2rem 1rem 1.2rem 1rem;
@@ -2108,12 +2110,24 @@ footer a:hover {
   .blog-grid {
     grid-template-columns: 1fr;
     gap: 0.7rem;
+    padding: 0 0.2rem;
   }
   .blog-card {
-    min-height: 320px;
+    min-height: 220px;
+    padding: 0.7rem 0.3rem;
   }
   .blog-card-img {
-    height: 110px;
+    height: 90px;
+    border-radius: 0.7rem 0.7rem 0 0;
+  }
+  .blog-card-title {
+    font-size: 1rem;
+  }
+  .blog-card-excerpt {
+    font-size: 0.92rem;
+  }
+  .blog-card-content {
+    padding: 0.7rem 0.5rem 0.7rem 0.5rem;
   }
 }
 
