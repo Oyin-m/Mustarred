@@ -92,8 +92,8 @@ body {
   text-decoration: none;
 }
 .nav-logo-img {
-  height: 72px;
-  width: 72px;
+  height: 2rem;
+  /* width: 72px; */
   object-fit: contain;
   /* border-radius: 50%; */
   /* background: #fff; */
