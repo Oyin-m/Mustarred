@@ -127,8 +127,8 @@ nav.scrolled {
   -webkit-backdrop-filter: blur(0);
 }
 nav.scrolled .nav-logo-img {
-  height: 60px;
-  width: 60px;
+  height: 1.8rem;
+  /* width: 60px; */
 }
 .nav-links {
   display: flex;
