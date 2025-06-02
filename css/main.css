@@ -10,41 +10,43 @@
   --color-text: #1e293b;
   --color-text-light: #64748b;
   --color-border: #e2e8f0;
-  
+
   /* Typography */
-  --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-secondary: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-  
+  --font-primary: "Inter", system-ui, -apple-system, sans-serif;
+  --font-secondary: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+
   /* Spacing System */
   --space-xs: 0.5rem;
   --space-sm: 1rem;
   --space-md: 1.5rem;
   --space-lg: 2rem;
   --space-xl: 3rem;
-  
+
   /* Border Radius */
   --radius-sm: 0.375rem;
   --radius-md: 0.5rem;
   --radius-lg: 1rem;
   --radius-full: 9999px;
-  
+
   /* Shadows */
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
   --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
-  
+
   /* Transitions */
   --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-normal: 300ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
-  
+
   /* Container */
-  --container-max-width: 1280px;
+  --container-max-width: 1500px;
   --container-padding: clamp(1rem, 5vw, 2rem);
 }
 
 /* Modern CSS Reset */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -78,12 +80,16 @@ body {
 }
 
 /* Modern Navigation */
-.nav-container {
+.container.nav-container {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: space-between;
   height: 70px;
   padding: 0 1.5rem;
+
+  @media  (min-width: 1000px) {
+    align-items: center;
+  }
 }
 .nav-logo {
   display: flex;
@@ -115,12 +121,15 @@ nav {
   left: 0;
   width: 100%;
   z-index: 1000;
-  border-bottom: 1px solid rgba(200,200,200,0.13);
-  transition: background 0.5s cubic-bezier(.4,0,.2,1), box-shadow 0.5s cubic-bezier(.4,0,.2,1), padding 0.35s cubic-bezier(.4,0,.2,1), border-bottom 0.35s cubic-bezier(.4,0,.2,1);
+  border-bottom: 1px solid rgba(200, 200, 200, 0.13);
+  transition: background 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    padding 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    border-bottom 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 nav.scrolled {
   background: #f8f9fa;
-  box-shadow: 0 2px 12px rgba(34,58,94,0.07);
+  box-shadow: 0 2px 12px rgba(34, 58, 94, 0.07);
   padding: 0.18rem 0;
   border-bottom: 1.5px solid #e2e8f0;
   backdrop-filter: blur(0);
@@ -134,7 +143,8 @@ nav.scrolled .nav-logo-img {
   display: flex;
   gap: 0.18rem;
 }
-.nav-links a, nav a {
+.nav-links a,
+nav a {
   color: #223a5e;
   text-decoration: none;
   font-size: 0.95rem;
@@ -143,45 +153,88 @@ nav.scrolled .nav-logo-img {
   padding: 0.32rem 0.7rem;
   border-radius: 9999px;
   background: none;
-  transition: background 0.22s cubic-bezier(.4,0,.2,1), color 0.22s cubic-bezier(.4,0,.2,1), transform 0.22s cubic-bezier(.4,0,.2,1);
+  transition: background 0.22s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.22s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.22s cubic-bezier(0.4, 0, 0.2, 1);
   display: inline-block;
   line-height: 1.2;
   margin: 0 0.02rem;
 }
-.nav-links a:hover, nav a:hover {
-  background: rgba(37,99,235,0.10);
+.nav-links a:hover,
+nav a:hover {
+  background: rgba(37, 99, 235, 0.1);
   color: #2563eb;
   transform: scale(1.07);
-  box-shadow: 0 2px 8px rgba(37,99,235,0.07);
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.07);
 }
 @media (max-width: 900px) {
   nav {
     padding: 0.25rem 0;
   }
   .nav-logo-img {
-    height: 48px;
-    width: 48px;
+    height: 55px;
+    width: 55px;
   }
   nav.scrolled .nav-logo-img {
-    height: 36px;
-    width: 36px;
+    height: 55px;
+    width: 55px;
   }
-  .nav-links a, nav a {
+  .nav-links a,
+  nav a {
     font-size: 0.8rem;
     padding: 0.22rem 0.5rem;
   }
 }
 
+/* Mobile Menu Button Styles */
+.mobile-menu-btn {
+  display: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  z-index: 1002;
+}
+
+.mobile-menu-btn span {
+  display: block;
+  width: 25px;
+  height: 2px;
+  margin: 5px 0;
+  background-color: var(--color-text);
+  transition: var(--transition-normal);
+}
+
+/* X transformation when menu is active */
+.mobile-menu-btn.active span:nth-child(1) {
+  transform: rotate(45deg) translate(2px, 2px);
+}
+
+.mobile-menu-btn.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-menu-btn.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(4px, -4px);
+}
+
+@media (max-width: 768px) {
+  .mobile-menu-btn {
+    display: block;
+  }
+}
+
 /***** GLOBAL STYLES *****/
-html, body {
-  margin: 0;        /* Remove default browser margins */
-  padding: 0;       /* Remove default browser paddings */
+html,
+body {
+  margin: 0; /* Remove default browser margins */
+  padding: 0; /* Remove default browser paddings */
   overflow-x: hidden; /* Crucial: Prevents horizontal scrollbar if 100vw causes minor overflow */
 }
 
 body {
   margin: 0;
-  font-family: 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+  font-family: "Segoe UI", "Roboto", "Arial", sans-serif;
   background: #fdfdff;
   color: #222;
   min-height: 100vh;
@@ -205,7 +258,7 @@ body {
   position: relative; /* Essential for pseudo-element and absolute child positioning */
   min-height: 80vh;
   background: #fff;
-  background-image: url('../images/hero-stripes.png') !important;
+  background-image: url("../images/hero-stripes.png") !important;
   background-size: cover !important;
   background-position: center !important;
   background-repeat: no-repeat !important;
@@ -213,10 +266,13 @@ body {
   align-items: center;
   justify-content: center;
   overflow: hidden; /* Keep to prevent content from overflowing */
+  @media screen and (max-width: 1000px) {
+    min-height: 38vh;
+  }
 }
 
 #hero::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -253,9 +309,13 @@ body {
   font-weight: 800;
   line-height: 1.1;
   margin-bottom: var(--space-lg);
-  background: linear-gradient(135deg, var(--color-text) 0%, var(--color-primary) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--color-text) 0%,
+    var(--color-primary) 100%
+  );
   -webkit-background-clip: text; /* For older Webkit browsers */
-  background-clip: text;         /* Standard property for modern browsers */
+  background-clip: text; /* Standard property for modern browsers */
   -webkit-text-fill-color: transparent;
   animation: fadeInUp 0.8s ease-out;
 }
@@ -297,7 +357,7 @@ body {
   height: 50%;
   object-fit: cover; /* Important: Cover the available space, potentially cropping the image */
   object-position: center; /* Optional: Adjust image positioning if needed */
-  max-height: 100%
+  max-height: 100%;
 }
 
 /* Consolidated hero-swiper rule */
@@ -308,13 +368,13 @@ body {
 
 /* Consolidated hero-swiper .swiper-slide rule */
 .hero-swiper .swiper-slide {
-  display: flex;             /* Make it a flex container */
-  flex-direction: row;       /* Arrange items side-by-side */
-  align-items: center;       /* Vertically center text and image */
+  display: flex; /* Make it a flex container */
+  flex-direction: row; /* Arrange items side-by-side */
+  align-items: center; /* Vertically center text and image */
   justify-content: space-between; /* Distribute items with space between them (text left, image right) */
-  min-height: 80vh;          /* Ensure slide is tall enough to contain content and image */
-  padding: 0 0%;             /* Add some horizontal padding to the overall slide content */
-  box-sizing: border-box;    /* Include padding in width calculations */
+
+  padding: 0 0%; /* Add some horizontal padding to the overall slide content */
+  box-sizing: border-box; /* Include padding in width calculations */
   /* REMOVED: background: none; - from previous rule */
   /* REMOVED: text-align: left; - from previous rule */
 }
@@ -351,16 +411,17 @@ body {
 }
 
 /* Consolidated hero-cta buttons */
-.primary-btn, .secondary-btn {
+.primary-btn,
+.secondary-btn {
   font-size: 0.98rem;
   padding: 0.55rem 1.3rem;
   border-radius: 1.2rem;
   font-weight: 700;
   border: none;
   outline: none;
-  transition: all 0.18s cubic-bezier(.4,0,.2,1);
+  transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
   letter-spacing: 0.01em;
-  box-shadow: 0 1px 4px rgba(21,101,192,0.07);
+  box-shadow: 0 1px 4px rgba(21, 101, 192, 0.07);
 }
 .primary-btn {
   background: #1565c0;
@@ -370,7 +431,7 @@ body {
   background: #0d47a1;
   color: #fff;
   transform: translateY(-2px) scale(1.04);
-  box-shadow: 0 4px 16px rgba(21,101,192,0.13);
+  box-shadow: 0 4px 16px rgba(21, 101, 192, 0.13);
 }
 .secondary-btn {
   background: #fff;
@@ -381,7 +442,7 @@ body {
   background: #f2f6fb;
   color: #0d47a1;
   transform: translateY(-2px) scale(1.04);
-  box-shadow: 0 4px 16px rgba(21,101,192,0.09);
+  box-shadow: 0 4px 16px rgba(21, 101, 192, 0.09);
 }
 
 /* --- Assurance Section --- */
@@ -398,11 +459,11 @@ body {
 
 /* Optional: Add a subtle underline/accent to the heading */
 .assurance-card h2::after {
-  content: '';
+  content: "";
   display: block;
   width: 60px; /* Short underline */
   height: 4px;
-  background-color: #90D5FF; /* Your requested blue color as an accent */
+  background-color: #90d5ff; /* Your requested blue color as an accent */
   margin: 0.8rem auto 0 auto; /* Center the underline */
   border-radius: 2px;
 }
@@ -429,11 +490,11 @@ body {
 
 /* Add a custom bullet point with your accent color */
 .assurance-card li::before {
-  content: '✓'; /* Or '•' or '►' or a FontAwesome icon */
+  content: "✓"; /* Or '•' or '►' or a FontAwesome icon */
   position: absolute;
   left: 0;
   top: 0.1rem; /* Adjust vertical position */
-  color: #90D5FF; /* Your accent blue color */
+  color: #90d5ff; /* Your accent blue color */
   font-weight: bold;
   font-size: 1.2rem;
   line-height: 1.6; /* Match li line-height */
@@ -475,7 +536,10 @@ body {
 
 .insights-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid */
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(280px, 1fr)
+  ); /* Responsive grid */
   gap: 2.5rem; /* Space between cards */
   max-width: 1200px; /* Limit grid width */
   margin: 0 auto; /* Center the grid */
@@ -527,6 +591,7 @@ body {
   text-decoration: none;
   font-weight: 600;
   transition: color 0.2s;
+  cursor: pointer;
 }
 
 .insight-card .read-more:hover {
@@ -555,7 +620,13 @@ body {
 
 /***** GENERAL SECTION AND TEXT BLOCK LAYOUT (Consolidated and adjusted for #hero) *****/
 /* This block was duplicated. Consolidated and placed here. */
-#hero, #assurances, #services, #cta, #testimonials, #contact, #blog #trending-insights {
+#hero,
+#assurances,
+#services,
+#cta,
+#testimonials,
+#contact,
+#blog #trending-insights {
   max-width: 100%; /* Ensured consistent max-width across sections */
   width: 100%;
   margin: 0; /* Centralized margin control */
@@ -565,8 +636,10 @@ body {
 
 #assurances {
   background-color: #f8f9fa; /* Light grey background for the section */
-  width: 100vw; max-width: 100vw;
-  margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw);
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
   padding: 4rem 5%; /* Main padding for the section content from edges */
   box-sizing: border-box;
   display: flex; /* Make section a flex container */
@@ -575,7 +648,13 @@ body {
 }
 
 /* Removed #hero p, #hero .slider as they are now handled by .hero-content etc. */
-#assurances ul, .service-category, #services p, #cta p, .testimonial, #contact p, #blog p {
+#assurances ul,
+.service-category,
+#services p,
+#cta p,
+.testimonial,
+#contact p,
+#blog p {
   margin-left: 0;
   margin-right: 0;
   text-align: left;
@@ -590,8 +669,10 @@ section {
 /* --- SECTION CONTAINER (#assurances) --- */
 #assurances {
   background-color: #f8f9fa; /* Light grey background for the section */
-  width: 100vw; max-width: 100vw;
-  margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw);
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
   padding: 4rem 5%; /* Main padding for the section content from edges */
   box-sizing: border-box;
   display: flex; /* Make section a flex container */
@@ -617,11 +698,11 @@ section {
 /* --- Accent Underline for Heading (#assurances h2::after) --- */
 /* REMOVED: Duplicate nested rule '#assurances h2::after { #assurances h2::after { ... } }' */
 #assurances h2::after {
-  content: '';
+  content: "";
   display: block;
   width: 60px;
   height: 4px;
-  background-color: #90D5FF; /* Your accent blue color */
+  background-color: #90d5ff; /* Your accent blue color */
   margin: 0.8rem auto 0 auto; /* Center the underline */
   border-radius: 2px;
 }
@@ -630,7 +711,10 @@ section {
 /* This is the ONLY place this should be defined for the grid layout */
 .assurances-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* THIS IS THE CORRECT RESPONSIVE GRID */
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(280px, 1fr)
+  ); /* THIS IS THE CORRECT RESPONSIVE GRID */
   gap: 2.5rem; /* Space between cards */
   max-width: 1200px; /* Limit overall grid width */
   width: 100%; /* Ensure it takes full width within #assurances */
@@ -679,11 +763,11 @@ section {
 /* --- CUSTOM BULLET POINT (::before) --- */
 /* This is the ONLY place custom bullet should be defined */
 .assurances-grid li::before {
-  content: '✓'; /* Add custom bullet content */
+  content: "✓"; /* Add custom bullet content */
   position: absolute;
   left: 0.5rem; /* Adjust position relative to card padding */
   top: 1.5rem; /* Adjust vertical position relative to card padding */
-  color: #90D5FF; /* Your accent blue color */
+  color: #90d5ff; /* Your accent blue color */
   font-weight: bold;
   font-size: 1.2rem;
   line-height: 1.6;
@@ -779,7 +863,7 @@ section {
   margin-bottom: 0;
 }
 .testimonial:hover {
-  box-shadow: 0 4px 16px rgba(255,179,0,0.10);
+  box-shadow: 0 4px 16px rgba(255, 179, 0, 0.1);
 }
 .testimonial p:first-child {
   color: #444;
@@ -858,7 +942,12 @@ footer a:hover {
 
 /***** DESKTOP LAYOUT (Media Queries - Consolidated) *****/
 @media (min-width: 1200px) {
-  #hero, #services, #cta, #testimonials, #contact, #blog {
+  #hero,
+  #services,
+  #cta,
+  #testimonials,
+  #contact,
+  #blog {
     max-width: 1200px;
     padding-left: 5vw;
     padding-right: 5vw;
@@ -870,7 +959,15 @@ footer a:hover {
     padding-right: 5vw;
   }
 
-  #hero p, #hero .slider, #assurances ul, .service-category, #services p, #cta p, .testimonial, #contact p, #blog p {
+  #hero p,
+  #hero .slider,
+  #assurances ul,
+  .service-category,
+  #services p,
+  #cta p,
+  .testimonial,
+  #contact p,
+  #blog p {
     max-width: 900px;
     margin-left: 0;
     margin-right: 0;
@@ -880,7 +977,12 @@ footer a:hover {
 
 /***** LAPTOP LAYOUT *****/
 @media (min-width: 900px) and (max-width: 1199px) {
-  #hero, #services, #cta, #testimonials, #contact, #blog {
+  #hero,
+  #services,
+  #cta,
+  #testimonials,
+  #contact,
+  #blog {
     max-width: 1000px;
     padding-left: 3vw;
     padding-right: 3vw;
@@ -892,7 +994,15 @@ footer a:hover {
     padding-right: 3vw;
   }
 
-  #hero p, #hero .slider, #assurances ul, .service-category, #services p, #cta p, .testimonial, #contact p, #blog p {
+  #hero p,
+  #hero .slider,
+  #assurances ul,
+  .service-category,
+  #services p,
+  #cta p,
+  .testimonial,
+  #contact p,
+  #blog p {
     max-width: 750px;
     margin-left: 0;
     margin-right: 0;
@@ -902,12 +1012,26 @@ footer a:hover {
 
 /***** TABLET LAYOUT *****/
 @media (min-width: 700px) and (max-width: 899px) {
-  #hero, #assurances, #services, #cta, #testimonials, #contact, #blog {
+  #hero,
+  #assurances,
+  #services,
+  #cta,
+  #testimonials,
+  #contact,
+  #blog {
     max-width: 90vw;
     padding-left: 2vw;
     padding-right: 2vw;
   }
-  #hero p, #hero .slider, #assurances ul, .service-category, #services p, #cta p, .testimonial, #contact p, #blog p {
+  #hero p,
+  #hero .slider,
+  #assurances ul,
+  .service-category,
+  #services p,
+  #cta p,
+  .testimonial,
+  #contact p,
+  #blog p {
     max-width: 90vw;
     margin-left: 0;
     margin-right: 0;
@@ -917,18 +1041,31 @@ footer a:hover {
 
 /***** MOBILE LAYOUT *****/
 @media (max-width: 768px) {
-  #hero, #assurances, #services, #cta, #testimonials, #contact, #blog {
+  #hero,
+  #assurances,
+  #services,
+  #cta,
+  #testimonials,
+  #contact,
+  #blog {
     max-width: 100vw;
-    padding: 1.2rem 0.5rem;
+    padding: 1.2rem 1rem;
     border-radius: 1rem;
   }
-  #hero h1 { /* This rule is likely targeting h1 but hero-main is a div */
+  #hero h1 {
+    /* This rule is likely targeting h1 but hero-main is a div */
     font-size: 2rem;
   }
-  .slide h2 { /* This rule is likely targeting h2 but hero-main is a div */
+  .slide h2 {
+    /* This rule is likely targeting h2 but hero-main is a div */
     font-size: 1.1rem;
   }
-  #assurances h2, #services h2, #cta h2, #testimonials h2, #contact h2, #blog h2 {
+  #assurances h2,
+  #services h2,
+  #cta h2,
+  #testimonials h2,
+  #contact h2,
+  #blog h2 {
     font-size: 1.2rem;
   }
   .service-category h3 {
@@ -942,10 +1079,14 @@ footer a:hover {
     font-size: 0.95rem;
     margin: 0 0.3rem;
   }
-  #assurances ul, .service-category ul {
+  #assurances ul,
+  .service-category ul {
     padding-left: 1rem;
   }
-  #services p, #cta p, #contact p, #blog p {
+  #services p,
+  #cta p,
+  #contact p,
+  #blog p {
     padding-left: 0.2rem;
     padding-right: 0.2rem;
     max-width: 98vw;
@@ -964,11 +1105,11 @@ footer a:hover {
 }
 
 .service-category {
-  background: rgba(255,255,255,0.85);
+  background: rgba(255, 255, 255, 0.85);
   border-radius: 1.5rem;
   box-shadow: 0 8px 32px rgba(31, 38, 135, 0.12);
   padding: 2.5rem 2rem 2rem 2rem;
-  border: 1px solid rgba(200,200,200,0.15);
+  border: 1px solid rgba(200, 200, 200, 0.15);
   transition: box-shadow 0.2s, transform 0.2s;
   position: relative;
   overflow: hidden;
@@ -1038,18 +1179,18 @@ footer a:hover {
 }
 
 .service-category {
-  background: rgba(255,255,255,0.92);
+  background: rgba(255, 255, 255, 0.92);
   border-radius: 1.7rem;
   box-shadow: 0 8px 32px rgba(31, 38, 135, 0.13);
   padding: 2.7rem 2rem 2.2rem 2rem;
-  border: 1.5px solid rgba(200,200,200,0.13);
+  border: 1.5px solid rgba(200, 200, 200, 0.13);
   transition: box-shadow 0.25s, transform 0.22s, border 0.22s;
   position: relative;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   min-height: 340px;
-  animation: fadeInUp 0.8s cubic-bezier(.4,0,.2,1);
+  animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1);
   animation-fill-mode: both;
   opacity: 0;
   transform: translateY(40px);
@@ -1061,7 +1202,8 @@ footer a:hover {
 }
 
 .service-category:hover {
-  box-shadow: 0 20px 48px rgba(31, 38, 135, 0.19), 0 2px 8px rgba(21,101,192,0.07);
+  box-shadow: 0 20px 48px rgba(31, 38, 135, 0.19),
+    0 2px 8px rgba(21, 101, 192, 0.07);
   transform: translateY(-10px) scale(1.025);
   border: 1.5px solid var(--color-primary);
 }
@@ -1083,9 +1225,13 @@ footer a:hover {
   width: 44px;
   height: 4px;
   border-radius: 2px;
-  background: linear-gradient(90deg, var(--color-primary) 60%, var(--color-accent) 100%);
+  background: linear-gradient(
+    90deg,
+    var(--color-primary) 60%,
+    var(--color-accent) 100%
+  );
   margin-bottom: 1.2rem;
-  transition: width 0.25s cubic-bezier(.4,0,.2,1);
+  transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .service-category:hover .service-title-bar {
@@ -1096,7 +1242,7 @@ footer a:hover {
   font-size: 2.1rem;
   color: var(--color-accent);
   flex-shrink: 0;
-  filter: drop-shadow(0 2px 6px rgba(245,158,11,0.08));
+  filter: drop-shadow(0 2px 6px rgba(245, 158, 11, 0.08));
 }
 
 .service-category ul {
@@ -1164,7 +1310,7 @@ footer a:hover {
   min-height: 80px;
   opacity: 0;
   transform: translateY(40px);
-  animation: fadeInUp 0.8s cubic-bezier(.4,0,.2,1) forwards;
+  animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 .timeline-step.visible {
   opacity: 1;
@@ -1178,23 +1324,31 @@ footer a:hover {
   min-width: 54px;
   min-height: 54px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--color-primary) 60%, var(--color-accent) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--color-primary) 60%,
+    var(--color-accent) 100%
+  );
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 2rem;
   color: #fff;
-  box-shadow: 0 4px 16px rgba(37,99,235,0.10);
+  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.1);
   margin-right: 2rem;
 }
 .timeline-step:not(:last-child)::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 27px;
   top: 54px;
   width: 2.5px;
   height: calc(100% - 54px);
-  background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-accent) 100%);
+  background: linear-gradient(
+    180deg,
+    var(--color-primary) 0%,
+    var(--color-accent) 100%
+  );
   opacity: 0.18;
   z-index: 1;
 }
@@ -1255,11 +1409,11 @@ footer a:hover {
   padding-bottom: 3.5rem;
 }
 .service-slide {
-  background: rgba(255,255,255,0.95);
+  background: rgba(255, 255, 255, 0.95);
   border-radius: 1.5rem;
   box-shadow: 0 8px 32px rgba(31, 38, 135, 0.13);
   padding: 2.5rem 2rem 2rem 2rem;
-  border: 1.5px solid rgba(200,200,200,0.13);
+  border: 1.5px solid rgba(200, 200, 200, 0.13);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -1269,14 +1423,15 @@ footer a:hover {
   transition: box-shadow 0.22s, transform 0.22s, border 0.22s;
   opacity: 0;
   transform: translateY(40px);
-  animation: fadeInUp 0.8s cubic-bezier(.4,0,.2,1) forwards;
+  animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 .service-slide.visible {
   opacity: 1;
   transform: translateY(0);
 }
 .service-slide:hover {
-  box-shadow: 0 20px 48px rgba(31, 38, 135, 0.19), 0 2px 8px rgba(21,101,192,0.07);
+  box-shadow: 0 20px 48px rgba(31, 38, 135, 0.19),
+    0 2px 8px rgba(21, 101, 192, 0.07);
   transform: translateY(-10px) scale(1.025);
   border: 1.5px solid var(--color-primary);
 }
@@ -1284,7 +1439,7 @@ footer a:hover {
   font-size: 2.2rem;
   color: var(--color-accent);
   margin-bottom: 1.1rem;
-  filter: drop-shadow(0 2px 6px rgba(245,158,11,0.08));
+  filter: drop-shadow(0 2px 6px rgba(245, 158, 11, 0.08));
 }
 .service-slide h3 {
   font-size: 1.18rem;
@@ -1324,7 +1479,7 @@ footer a:hover {
   height: 38px;
   border-radius: 50%;
   background: #fff;
-  box-shadow: 0 2px 8px rgba(21,101,192,0.07);
+  box-shadow: 0 2px 8px rgba(21, 101, 192, 0.07);
   transition: background 0.2s;
 }
 .services-swiper .swiper-button-next:hover,
@@ -1363,7 +1518,9 @@ footer a:hover {
 
 .service-list-fade {
   position: absolute;
-  left: 0; right: 0; bottom: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   height: 32px;
   background: linear-gradient(180deg, transparent, #fff 90%);
   pointer-events: none;
@@ -1390,7 +1547,7 @@ footer a:hover {
 .icon-box {
   background: #fff;
   border-radius: 1.5rem;
-  box-shadow: 0 4px 24px rgba(34,58,94,0.07);
+  box-shadow: 0 4px 24px rgba(34, 58, 94, 0.07);
   padding: 2.5rem 1.5rem 2rem 1.5rem;
   transition: opacity 0.25s, filter 0.25s, box-shadow 0.2s, transform 0.2s;
   display: flex;
@@ -1400,16 +1557,17 @@ footer a:hover {
   opacity: 0.5;
   filter: grayscale(1) brightness(1.15);
   transform: translateY(40px);
-  animation: fadeInUp 0.8s cubic-bezier(.4,0,.2,1) forwards;
+  animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 .icon-box.visible {
   opacity: 1;
   transform: translateY(0);
 }
-.icon-box:hover, .icon-box:focus-within {
+.icon-box:hover,
+.icon-box:focus-within {
   opacity: 1;
   filter: none;
-  box-shadow: 0 12px 32px rgba(34,58,94,0.13);
+  box-shadow: 0 12px 32px rgba(34, 58, 94, 0.13);
   transform: translateY(-8px) scale(1.03);
 }
 .icon-box-icon {
@@ -1466,7 +1624,11 @@ footer a:hover {
 
 .assurances-modern {
   background: linear-gradient(135deg, #f8fafc 0%, #e0e7ef 100%);
-  padding: 5rem 0 5rem 0;
+  padding: 5rem 1rem;
+
+  @media screen and (max-width: 1000px) {
+    padding: 5rem 1.5rem;
+  }
 }
 .assurances-grid {
   display: grid;
@@ -1525,7 +1687,7 @@ footer a:hover {
   aspect-ratio: 4/3;
   object-fit: cover;
   border-radius: 1.2rem;
-  box-shadow: 0 4px 24px rgba(34,58,94,0.07);
+  box-shadow: 0 4px 24px rgba(34, 58, 94, 0.07);
   background: #e3edfa;
 }
 @media (max-width: 900px) {
@@ -1545,7 +1707,6 @@ footer a:hover {
 
 .assurances-modern.atlanta-style {
   background: #f4f8fd;
-  padding: 5rem 0 5rem 0;
 }
 .assurances-title-row {
   display: flex;
@@ -1622,7 +1783,7 @@ footer a:hover {
   aspect-ratio: 4/3;
   object-fit: cover;
   border-radius: 1.2rem;
-  box-shadow: 0 4px 24px rgba(34,58,94,0.07);
+  box-shadow: 0 4px 24px rgba(34, 58, 94, 0.07);
   background: #e3edfa;
 }
 @media (max-width: 900px) {
@@ -1645,7 +1806,7 @@ footer a:hover {
 
 .services-atlanta {
   background: #fff;
-  padding: 5rem 0 5rem 0;
+  padding: 5rem 1rem;
 }
 .services-title-row {
   display: flex;
@@ -1732,7 +1893,7 @@ footer a:hover {
 
 .contact-atlanta {
   background: #f4f8fd;
-  padding: 5rem 0 5rem 0;
+  padding: 5rem 1rem;
 }
 .contact-atlanta-grid {
   display: grid;
@@ -1803,7 +1964,7 @@ footer a:hover {
   padding: 1rem 1.2rem;
   font-size: 1.05rem;
   color: #223a5e;
-  box-shadow: 0 2px 8px rgba(34,58,94,0.07);
+  box-shadow: 0 2px 8px rgba(34, 58, 94, 0.07);
   width: 100%;
   resize: none;
   transition: border-color 0.2s, box-shadow 0.2s;
@@ -1816,7 +1977,7 @@ footer a:hover {
 .contact-atlanta-form textarea:focus {
   outline: none;
   border-left: 4px solid #223a5e;
-  box-shadow: 0 4px 16px rgba(34,58,94,0.13);
+  box-shadow: 0 4px 16px rgba(34, 58, 94, 0.13);
 }
 .contact-atlanta-form button {
   background: #2563eb;
@@ -1828,13 +1989,17 @@ footer a:hover {
   padding: 1rem 2.2rem;
   margin-top: 0.5rem;
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(34,58,94,0.07);
+  box-shadow: 0 2px 8px rgba(34, 58, 94, 0.07);
   transition: background 0.2s;
 }
 .contact-atlanta-form button:hover {
   background: #223a5e;
 }
 @media (max-width: 900px) {
+  .contact-atlanta {
+    background: #f4f8fd;
+    padding: 5rem 1.5rem;
+  }
   .contact-atlanta-grid {
     grid-template-columns: 1fr;
     gap: 2.5rem;
@@ -1879,7 +2044,7 @@ footer a:hover {
   border-radius: 0.5rem;
   padding: 0.7rem 2.2rem;
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(34,58,94,0.07);
+  box-shadow: 0 2px 8px rgba(34, 58, 94, 0.07);
   transition: background 0.2s;
 }
 .cta-atlanta-btn:hover {
@@ -1950,13 +2115,14 @@ footer a:hover {
   color: #888;
   font-size: 0.98rem;
 }
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
   .testimonial-card {
     flex-direction: column;
     align-items: center;
     text-align: center;
     min-height: unset;
     height: auto;
+    padding: 0 1rem;
   }
   .testimonial-img-block {
     width: 100%;
@@ -2008,7 +2174,7 @@ footer a:hover {
 .blog-card {
   background: #fff;
   border-radius: 1.3rem;
-  box-shadow: 0 6px 32px rgba(34,58,94,0.09);
+  box-shadow: 0 6px 32px rgba(34, 58, 94, 0.09);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -2017,7 +2183,7 @@ footer a:hover {
   position: relative;
 }
 .blog-card:hover {
-  box-shadow: 0 16px 48px rgba(34,58,94,0.13);
+  box-shadow: 0 16px 48px rgba(34, 58, 94, 0.13);
   transform: translateY(-6px) scale(1.025);
 }
 .blog-card-img {
@@ -2186,7 +2352,7 @@ footer a:hover {
   height: 340px;
   object-fit: cover;
   border-radius: 1.2rem;
-  box-shadow: 0 4px 24px rgba(34,58,94,0.07);
+  box-shadow: 0 4px 24px rgba(34, 58, 94, 0.07);
   background: #e3edfa;
   margin-top: 1.5rem;
   margin-bottom: 0.5rem;
@@ -2208,7 +2374,7 @@ footer a:hover {
   background: linear-gradient(120deg, #fffbe6 60%, #f8f9fa 100%);
   border-left: 4px solid #ffb300;
   border-radius: 1.1rem;
-  box-shadow: 0 2px 12px rgba(245,158,11,0.07);
+  box-shadow: 0 2px 12px rgba(245, 158, 11, 0.07);
   padding: 2.2rem 1.5rem 2.2rem 2rem;
   min-width: 260px;
   max-width: 320px;
@@ -2238,7 +2404,7 @@ footer a:hover {
   position: relative;
 }
 .article-highlights li::before {
-  content: '★';
+  content: "★";
   color: #ffb300;
   position: absolute;
   left: 0;
@@ -2280,7 +2446,7 @@ footer a:hover {
   position: relative;
 }
 .article-content blockquote::before {
-  content: '\201C';
+  content: "\201C";
   color: #ffb300;
   font-size: 2.5rem;
   position: absolute;
@@ -2295,7 +2461,7 @@ footer a:hover {
   object-fit: cover;
   border-radius: 1rem;
   margin: 2rem 0;
-  box-shadow: 0 2px 12px rgba(37,99,235,0.08);
+  box-shadow: 0 2px 12px rgba(37, 99, 235, 0.08);
   display: block;
 }
 @media (max-width: 900px) {
@@ -2408,7 +2574,7 @@ footer a:hover {
     top: 70px;
     left: 0;
     width: 100vw;
-    padding: 1.2rem 0;
+    padding: 1.2rem;
     display: none;
     z-index: 1001;
   }
@@ -2421,6 +2587,16 @@ footer a:hover {
     right: 1.2rem;
     top: 1.2rem;
     z-index: 1002;
+    width: 25px;
+    height: 25px;
+
+    span {
+      display: block;
+      border-bottom: 1px solid black;
+      height: 1px;
+      width: 100%;
+      margin-block: 0.2rem;
+    }
   }
   .hero-content {
     padding: 1.2rem 0.5rem;
@@ -2431,11 +2607,13 @@ footer a:hover {
     height: auto;
     margin-top: 1.2rem;
   }
-  .services-atlanta-grid, .assurances-grid {
+  .services-atlanta-grid,
+  .assurances-grid {
     grid-template-columns: 1fr;
     gap: 1.2rem;
   }
-  .atlanta-card, .assurances-content {
+  .atlanta-card,
+  .assurances-content {
     padding: 1.2rem 0.7rem;
     min-width: 0;
   }
@@ -2463,7 +2641,8 @@ footer a:hover {
   .hero-sub {
     font-size: 0.95rem;
   }
-  .primary-btn, .secondary-btn {
+  .primary-btn,
+  .secondary-btn {
     font-size: 0.9rem;
     padding: 0.4rem 1rem;
   }
@@ -2477,10 +2656,15 @@ footer a:hover {
     align-items: center;
     gap: 0.3rem;
   }
+
   .footer-brand h3 {
     font-size: 1.1rem;
   }
   .footer-brand p {
     font-size: 0.95rem;
   }
+}
+.footer-brand,
+.footer-links-group {
+  color: #fff;
 }
